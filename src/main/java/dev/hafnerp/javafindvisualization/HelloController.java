@@ -58,8 +58,8 @@ public class HelloController {
         final EventLogger eventLogger = EventLogger.getInstance();
 
         logger.debug("Using path: " + searchPath);
-        eventLogger.logEvent("Starting at path: " + searchPath);
-        eventLogger.logEvent("Searching for word: \"" + searchString + "\"");
+        eventLogger.logEvent("HelloController", "Starting at path: " + searchPath);
+        eventLogger.logEvent("HelloController", "Searching for word: \"" + searchString + "\"");
 
         ListWrapper<Path> pathListWrapper = ListWrapper.getPathInstance();
 

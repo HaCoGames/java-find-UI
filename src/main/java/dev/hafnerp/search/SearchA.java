@@ -8,7 +8,7 @@ import java.io.File;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.Timestamp;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,8 @@ public class SearchA implements Runnable {
     private static final Logger logger = LogManager.getLogger(SearchA.class);
 
     private final EventLogger eventLogger;
+
+    private String eventLoggerPrefix = "";
 
     private final boolean first;
 
@@ -46,6 +48,7 @@ public class SearchA implements Runnable {
         allChildRunnable = new ArrayList<>();
 
         eventLogger = EventLogger.getInstance();
+        eventLoggerPrefix = this.getClass() + " - thread "+ instanceCounterAll;
     }
 
     public boolean isFirst() {
@@ -82,8 +85,10 @@ public class SearchA implements Runnable {
 
     @Override
     public void run() {
+        Instant startTime = Instant.now();
         try {
-            eventLogger.logEvent(this.getClass() + " - Starting thread "+ instanceCounterAll +" at: " + Instant.now());
+            eventLogger.logEvent(eventLoggerPrefix, "Starting at: " + startTime);
+            eventLogger.logEvent(eventLoggerPrefix, "Searching in path \"" + directory + "\"");
             File file = new File(String.valueOf(directory));
             if (file.isDirectory()) {
                 DirectoryStream<Path> direct = Files.newDirectoryStream(directory);
@@ -103,6 +108,7 @@ public class SearchA implements Runnable {
                 }
             }
             else if (file.isFile()) {
+                eventLogger.logEvent(eventLoggerPrefix, "Starting search algorithm at: " +Instant.now());
                 Scanner scanner = new Scanner(file);
                 boolean found = false;
                 while (scanner.hasNextLine() && !found) {
@@ -115,14 +121,18 @@ public class SearchA implements Runnable {
                     if (first) foundPaths.setFound(true);
                 }
                 scanner.close();
+                Instant endTime = Instant.now();
+                eventLogger.logEvent(eventLoggerPrefix, "Finished search at: " + endTime);
+                eventLogger.logEvent(eventLoggerPrefix, "Search lasted " + Duration.between(startTime, endTime).toMillis() + " milliseconds");
             }
         }
         catch (Exception e) {
-            System.out.println(e.toString());
-            System.out.println(e.toString());
+            logger.error(e);
         }
 
-        eventLogger.logEvent(this.getClass() + " - Finishing thread "+ instanceCounterAll +" at: " + Instant.now());
+        Instant endTime = Instant.now();
+        eventLogger.logEvent(eventLoggerPrefix, "Finishing at: " + Instant.now());
+        eventLogger.logEvent(eventLoggerPrefix, "The thread lived " + Duration.between(startTime, endTime).toMillis() + " milliseconds");
     }
 
     public static void interruptThreads(ArrayList<Thread> threads, ArrayList<SearchA> runnableS) {

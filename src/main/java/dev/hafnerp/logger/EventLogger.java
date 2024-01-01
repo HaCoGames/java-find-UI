@@ -25,9 +25,9 @@ public class EventLogger {
         this.text_events = events;
     }
 
-    public synchronized void logEvent(String event) {
-        logger.debug("Logging: " + event);
-        text_events.setText(text_events.getText() + event + "\n");
+    public synchronized void logEvent(String prefix, String event) {
+        logger.debug("Logging: " + prefix + " - " + event);
+        text_events.setText(text_events.getText() + prefix + " - " + event + "\n");
     }
 
 }
