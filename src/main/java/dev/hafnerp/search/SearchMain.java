@@ -1,5 +1,7 @@
 package dev.hafnerp.search;
 
+import dev.hafnerp.javafindvisualization.HelloController;
+import dev.hafnerp.logger.PathLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,12 +13,10 @@ public class SearchMain {
 
     private static final Logger logger = LogManager.getLogger(SearchMain.class);
 
-    public static void searchFor(boolean first, String word, Path path) throws InterruptedException, IOException {
-
+    public static void searchFor(boolean first, String word, Path path, int delay) throws InterruptedException, IOException {
         if (word != null) {
-            Thread thread = new Thread(new SearchA(first, word, path));
+            Thread thread = new Thread(new SearchA(first, word, path, delay));
             thread.start();
-            thread.join();
         }
         else {
             logger.debug("No word was given! Adding directory entries instead...");
@@ -26,6 +26,8 @@ public class SearchMain {
                 listWrapper.add(path2);
                 if (first) break;
             }
+            PathLogger pathLogger = PathLogger.getInstance();
+            listWrapper.getList().forEach(pathLogger::logPath);
         }
     }
 }

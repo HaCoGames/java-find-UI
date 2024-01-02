@@ -19,6 +19,9 @@ public class HelloController {
     private final Logger logger = LogManager.getLogger(HelloController.class);
 
     @FXML
+    private Label label_ready_to_search;
+
+    @FXML
     private TextArea text_events;
 
     @FXML
@@ -37,6 +40,9 @@ public class HelloController {
     private TextField text_searchstring;
 
     @FXML
+    private TextField text_delaytime;
+
+    @FXML
     private Label welcomeText;
 
     @FXML
@@ -48,12 +54,14 @@ public class HelloController {
         String searchPathString = text_searchpath.getText();
 
         Path searchPath = Path.of(searchPathString.isEmpty() ? "." : searchPathString );
+        int delayTime = text_delaytime.getText().isEmpty() ? 0:  Integer.parseInt(text_delaytime.getText());
 
         boolean first = checkbox_first.isSelected();
 
         logger.debug("Search String: \t\"" + searchString + "\"");
         logger.debug("Search Path:   \t" + searchPathString);
         logger.debug("Is first?:     \t" + first);
+        logger.debug("Delay time:    \t" + delayTime);
 
         final EventLogger eventLogger = EventLogger.getInstance();
 
@@ -67,21 +75,17 @@ public class HelloController {
 
         try {
             if (searchString.isEmpty()) searchString = null;
-            SearchMain.searchFor(first, searchString, searchPath);
+            SearchMain.searchFor(first, searchString, searchPath, delayTime);
         }
         catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
-
-        text_paths.setText(pathListWrapper.toString());
-
-        pathListWrapper.getList().forEach(logger::info);
-        pathListWrapper.resetVariables();
-        SearchA.setInstanceCounterAll(0);
     }
 
 
     public TextArea getText_events() {
         return text_events;
     }
+
+    public TextArea getText_paths() { return text_paths; }
 }

@@ -21,6 +21,7 @@
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="299.0" />
        <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="151.0" />
+         <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="151.0" />
      </columnConstraints>
      <rowConstraints>
        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -43,18 +44,24 @@
                <Insets bottom="4.0" left="20.0" right="20.0" top="4.0" />
             </padding>
          </Button>
+         <TextField fx:id="text_delaytime" promptText="delaytime" GridPane.columnIndex="1">
+            <GridPane.margin>
+               <Insets left="105.0" />
+            </GridPane.margin>
+         </TextField>
+         <Label fx:id="label_ready_to_search" prefHeight="18.0" prefWidth="211.0" text="Ready to search!" GridPane.columnIndex="2" />
       </children>
    </GridPane>
    <SplitPane dividerPositions="0.4928909952606635" orientation="VERTICAL" prefHeight="213.0" prefWidth="450.0">
      <items>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
             <children>
-               <TextArea fx:id="text_paths" prefHeight="102.0" prefWidth="790.0" />
+               <TextArea fx:id="text_paths" maxWidth="1010.0" prefHeight="102.0" prefWidth="780.0" />
             </children>
          </AnchorPane>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
             <children>
-               <TextArea fx:id="text_events" layoutX="-1.0" layoutY="1.0" prefHeight="103.0" prefWidth="790.0" />
+               <TextArea fx:id="text_events" layoutX="-1.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="103.0" prefWidth="780.0" />
             </children>
          </AnchorPane>
      </items>

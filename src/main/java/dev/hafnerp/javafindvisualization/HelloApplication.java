@@ -1,6 +1,7 @@
 package dev.hafnerp.javafindvisualization;
 
 import dev.hafnerp.logger.EventLogger;
+import dev.hafnerp.logger.PathLogger;
 import dev.hafnerp.search.ListWrapper;
 import dev.hafnerp.search.SearchA;
 import javafx.application.Application;
@@ -21,13 +22,15 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 700, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 833, 400);
 
         HelloController controller = fxmlLoader.getController();
         logger.debug("Created eventLogger on HelloController text_events: " + EventLogger.getInstance(controller.getText_events()));
+        logger.debug("Created pathLogger  on HelloController text_paths: " + PathLogger.getInstance(controller.getText_paths()));
 
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
 
     }

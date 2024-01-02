@@ -1,5 +1,6 @@
 package dev.hafnerp.logger;
 
+import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +28,7 @@ public class EventLogger {
 
     public synchronized void logEvent(String prefix, String event) {
         logger.debug("Logging: " + prefix + " - " + event);
-        text_events.setText(text_events.getText() + prefix + " - " + event + "\n");
+        Platform.runLater(() -> text_events.setText(prefix + " - " + event + "\n" + text_events.getText()));
     }
 
 }

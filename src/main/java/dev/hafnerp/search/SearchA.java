@@ -1,6 +1,7 @@
 package dev.hafnerp.search;
 
 import dev.hafnerp.logger.EventLogger;
+import dev.hafnerp.logger.PathLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,25 +29,25 @@ public class SearchA implements Runnable {
 
     private final Path directory;
 
+    private final int delay;
+
     private static final ListWrapper<Path> foundPaths = ListWrapper.getPathInstance();
 
-    private ArrayList<Thread> allChildThreads;
+    private static ArrayList<Thread> allChildThreads = new ArrayList<>();
 
-    private ArrayList<SearchA> allChildRunnable;
+    private static ArrayList<SearchA> allChildRunnable = new ArrayList<>();
 
     private static int instanceCounter = 0;
 
     private static long instanceCounterAll = 0;
 
-    public SearchA(boolean first, String word, Path directory) {
+    public SearchA(boolean first, String word, Path directory, int delay) {
         instanceCounter++;
         instanceCounterAll++;
         this.first = first;
         this.word = word;
         this.directory = directory;
-        allChildThreads = new ArrayList<>();
-        allChildRunnable = new ArrayList<>();
-
+        this.delay = delay;
         eventLogger = EventLogger.getInstance();
         eventLoggerPrefix = this.getClass() + " - thread "+ instanceCounterAll;
     }
@@ -97,14 +98,14 @@ public class SearchA implements Runnable {
                     SearchA runnable;
                     Thread th;
 
-                    runnable = new SearchA(first, word, path);
+                    runnable = new SearchA(first, word, path, delay);
                     th = new Thread(runnable);
 
                     allChildThreads.add(th);
                     allChildRunnable.add(runnable);
 
                     th.start();
-                    th.join();
+                    Thread.sleep(delay);
                 }
             }
             else if (file.isFile()) {
@@ -118,13 +119,21 @@ public class SearchA implements Runnable {
                 if (found) {
                     foundPaths.add(directory);
                     logger.debug("Found word in File: " + directory);
-                    if (first) foundPaths.setFound(true);
+                    if (first) {
+                        foundPaths.setFound(true);
+                        throw new InterruptedException("Word has been found.");
+                    }
                 }
                 scanner.close();
                 Instant endTime = Instant.now();
                 eventLogger.logEvent(eventLoggerPrefix, "Finished search at: " + endTime);
                 eventLogger.logEvent(eventLoggerPrefix, "Search lasted " + Duration.between(startTime, endTime).toMillis() + " milliseconds");
             }
+        }
+        catch (InterruptedException e) {
+            interruptThreads(allChildThreads);
+            eventLogger.logEvent(eventLoggerPrefix, "Interrupted thread, word has been found.");
+            logger.error(e);
         }
         catch (Exception e) {
             logger.error(e);
@@ -135,9 +144,8 @@ public class SearchA implements Runnable {
         eventLogger.logEvent(eventLoggerPrefix, "The thread lived " + Duration.between(startTime, endTime).toMillis() + " milliseconds");
     }
 
-    public static void interruptThreads(ArrayList<Thread> threads, ArrayList<SearchA> runnableS) {
+    public static void interruptThreads(ArrayList<Thread> threads) {
         threads.forEach(SearchA::interruptThread);
-        runnableS.forEach(SearchA::interruptRunnableThreads);
     }
 
     /**
@@ -149,16 +157,14 @@ public class SearchA implements Runnable {
         aThread.interrupt();
     }
 
-    private static void interruptRunnableThreads(SearchA searchA) {
-        System.out.println("SearchA - interrupting all the threads in runnable "+ searchA);
-        interruptThreads(searchA.getAllChildThreads(), searchA.getAllChildRunnable());
-    }
-
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
         if (--instanceCounter <= 0 && foundPaths.getList().isEmpty()) {
             System.exit(2);
+        }
+        if (instanceCounter <= 0) {
+            SearchA.setInstanceCounterAll(0);
         }
     }
 }
