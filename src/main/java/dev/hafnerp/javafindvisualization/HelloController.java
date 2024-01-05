@@ -4,6 +4,8 @@ import dev.hafnerp.logger.EventLogger;
 import dev.hafnerp.search.SearchA;
 import dev.hafnerp.search.SearchMain;
 import javafx.scene.control.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -12,7 +14,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class HelloController {
 
@@ -45,6 +49,8 @@ public class HelloController {
     @FXML
     private Label welcomeText;
 
+    private String paths = "";
+
     @FXML
     void onSearchButtonClicked(ActionEvent event) {
         text_events.setText("");
@@ -52,8 +58,11 @@ public class HelloController {
 
         String searchString = text_searchstring.getText();
         String searchPathString = text_searchpath.getText();
+        searchPathString = searchPathString.isEmpty() ? "." : searchPathString;
 
-        Path searchPath = Path.of(searchPathString.isEmpty() ? "." : searchPathString );
+        if (!validatePath(searchPathString)) return;
+
+        Path searchPath = Path.of(searchPathString);
         int delayTime = text_delaytime.getText().isEmpty() ? 0:  Integer.parseInt(text_delaytime.getText());
 
         boolean first = checkbox_first.isSelected();
@@ -82,6 +91,21 @@ public class HelloController {
         }
     }
 
+    private boolean validatePath(String paths) {
+        boolean validPath = true;
+        try {
+            Path path = Path.of(paths);
+            logger.debug("Checking if the path exists... " + path);
+            validPath = Files.exists(path);
+            if (!validPath) label_ready_to_search.setText("Not a valid path provided!");
+            else label_ready_to_search.setText("Ready to search!");
+        } catch (Exception e) {
+            label_ready_to_search.setText("Not a valid path provided!");
+            validPath = false;
+        }
+        logger.debug("The path exists? " + validPath);
+        return validPath;
+    }
 
     public TextArea getText_events() {
         return text_events;

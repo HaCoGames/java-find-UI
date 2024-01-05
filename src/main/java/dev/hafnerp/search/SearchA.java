@@ -31,6 +31,8 @@ public class SearchA implements Runnable {
 
     private final int delay;
 
+    private volatile boolean interrupted;
+
     private static final ListWrapper<Path> foundPaths = ListWrapper.getPathInstance();
 
     private static ArrayList<Thread> allChildThreads = new ArrayList<>();
@@ -84,6 +86,10 @@ public class SearchA implements Runnable {
         instanceCounterAll = num;
     }
 
+    public void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
+    }
+
     @Override
     public void run() {
         Instant startTime = Instant.now();
@@ -94,7 +100,7 @@ public class SearchA implements Runnable {
             if (file.isDirectory()) {
                 DirectoryStream<Path> direct = Files.newDirectoryStream(directory);
                 for (Path path : direct) {
-                    if (foundPaths.isFound()) break;
+                    if (foundPaths.isFound() && !interrupted) break;
                     SearchA runnable;
                     Thread th;
 
@@ -112,13 +118,14 @@ public class SearchA implements Runnable {
                 eventLogger.logEvent(eventLoggerPrefix, "Starting search algorithm at: " +Instant.now());
                 Scanner scanner = new Scanner(file);
                 boolean found = false;
-                while (scanner.hasNextLine() && !found) {
+                while (scanner.hasNextLine() && !found && !interrupted) {
                     String line = scanner.nextLine();
-                    found = (line.contains(word));
+                    found = (line.contains(word)) && !interrupted;
                 }
                 if (found) {
                     foundPaths.add(directory);
                     logger.debug("Found word in File: " + directory);
+                    eventLogger.logEvent(eventLoggerPrefix, "-------------------Found word in File: " + directory);
                     if (first) {
                         foundPaths.setFound(true);
                         throw new InterruptedException("Word has been found.");
@@ -131,9 +138,11 @@ public class SearchA implements Runnable {
             }
         }
         catch (InterruptedException e) {
-            interruptThreads(allChildThreads);
+            new Thread(() -> allChildRunnable.forEach((searchA) -> searchA.setInterrupted(true))).start();
+            new Thread(() -> allChildThreads.forEach(Thread::interrupt)).start();
             eventLogger.logEvent(eventLoggerPrefix, "Interrupted thread, word has been found.");
             logger.error(e);
+            interrupted = true;
         }
         catch (Exception e) {
             logger.error(e);
@@ -142,19 +151,6 @@ public class SearchA implements Runnable {
         Instant endTime = Instant.now();
         eventLogger.logEvent(eventLoggerPrefix, "Finishing at: " + Instant.now());
         eventLogger.logEvent(eventLoggerPrefix, "The thread lived " + Duration.between(startTime, endTime).toMillis() + " milliseconds");
-    }
-
-    public static void interruptThreads(ArrayList<Thread> threads) {
-        threads.forEach(SearchA::interruptThread);
-    }
-
-    /**
-     * This function interrupts a Thread
-     * @param aThread A thread that should be interrupted.
-     */
-    private static void interruptThread(Thread aThread) {
-        System.out.println("SearchA - interrupt thread "+aThread.getName());
-        aThread.interrupt();
     }
 
     @Override

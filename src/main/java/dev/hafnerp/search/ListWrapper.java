@@ -43,7 +43,7 @@ public class ListWrapper<Type> {
         return new ArrayList<>(list);
     }
 
-    public synchronized void resetVariables() {
+    public synchronized void reset() {
         list.clear();
         found = false;
     }

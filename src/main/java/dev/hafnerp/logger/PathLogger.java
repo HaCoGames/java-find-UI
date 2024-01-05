@@ -32,4 +32,9 @@ public class PathLogger {
     public void logPath(Path path) {
         text_paths.setText(text_paths.getText() + path + "\n");
     }
+
+    public synchronized void reset() {
+        text_paths.setText("");
+
+    }
 }

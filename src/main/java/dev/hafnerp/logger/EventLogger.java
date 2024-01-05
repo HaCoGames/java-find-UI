@@ -9,6 +9,10 @@ public class EventLogger {
 
     private static final Logger logger = LogManager.getLogger(EventLogger.class);
 
+    private static final int MAX_EVENT_LENGTH = 200;
+
+    private static int currentEventLength = 0;
+
     private final TextArea text_events;
 
     private static EventLogger eventLogger = null;
@@ -28,7 +32,8 @@ public class EventLogger {
 
     public synchronized void logEvent(String prefix, String event) {
         logger.debug("Logging: " + prefix + " - " + event);
-        Platform.runLater(() -> text_events.setText(prefix + " - " + event + "\n" + text_events.getText()));
+        boolean add = !(currentEventLength >= MAX_EVENT_LENGTH);
+        Platform.runLater(() -> text_events.setText(prefix + " - " + event + "\n" + (add ? text_events.getText() : "")));
     }
 
 }

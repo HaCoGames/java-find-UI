@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Added the debugging information to the UI">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/EventLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/EventLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" afterDir="false" />
@@ -50,7 +50,10 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/hafnerp/Dokumente/4ahif/POS/threads/15_Responsive_FX_UI_Threads&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/peter/JavaProjectsWorkspace/java-find-UI&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RunManager" selected="Application.dev.hafnerp.javafindvisualization.HelloApplication">
@@ -119,5 +122,16 @@
     <MESSAGE value="Initialized the project" />
     <MESSAGE value="Added the debugging information to the UI" />
     <option name="LAST_COMMIT_MESSAGE" value="Added the debugging information to the UI" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
