@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Added the debugging information to the UI">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Implemented the delay, yet interruption does not work anymore :c">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/EventLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/EventLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dev/hafnerp/javafindvisualization/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/dev/hafnerp/javafindvisualization/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,23 +111,20 @@
       <option name="project" value="LOCAL" />
       <updated>1704101358499</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implemented the delay, yet interruption does not work anymore :c">
+      <created>1704466430566</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704466430566</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialized the project" />
     <MESSAGE value="Added the debugging information to the UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the debugging information to the UI" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java</url>
-          <line>127</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Implemented the delay, yet interruption does not work anymore :c" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented the delay, yet interruption does not work anymore :c" />
   </component>
 </project>

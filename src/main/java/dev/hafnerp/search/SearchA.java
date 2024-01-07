@@ -1,7 +1,6 @@
 package dev.hafnerp.search;
 
 import dev.hafnerp.logger.EventLogger;
-import dev.hafnerp.logger.PathLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +11,6 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class SearchA implements Runnable {
@@ -21,7 +19,7 @@ public class SearchA implements Runnable {
 
     private final EventLogger eventLogger;
 
-    private String eventLoggerPrefix = "";
+    private final String eventLoggerPrefix;
 
     private final boolean first;
 
@@ -35,9 +33,7 @@ public class SearchA implements Runnable {
 
     private static final ListWrapper<Path> foundPaths = ListWrapper.getPathInstance();
 
-    private static ArrayList<Thread> allChildThreads = new ArrayList<>();
-
-    private static ArrayList<SearchA> allChildRunnable = new ArrayList<>();
+    private static final ArrayList<Thread> allChildThreads = new ArrayList<>();
 
     private static int instanceCounter = 0;
 
@@ -54,40 +50,8 @@ public class SearchA implements Runnable {
         eventLoggerPrefix = this.getClass() + " - thread "+ instanceCounterAll;
     }
 
-    public boolean isFirst() {
-        return first;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public Path getDirectory() {
-        return directory;
-    }
-
-    public static List<Path> getFoundPaths() {
-        return foundPaths.getList();
-    }
-
-    public static int getInstanceCounter() {
-        return instanceCounter;
-    }
-
-    public ArrayList<SearchA> getAllChildRunnable() {
-        return new ArrayList<>(allChildRunnable);
-    }
-
-    public ArrayList<Thread> getAllChildThreads() {
-        return new ArrayList<>(allChildThreads);
-    }
-
     public static void setInstanceCounterAll(long num) {
         instanceCounterAll = num;
-    }
-
-    public void setInterrupted(boolean interrupted) {
-        this.interrupted = interrupted;
     }
 
     @Override
@@ -96,10 +60,14 @@ public class SearchA implements Runnable {
         try {
             eventLogger.logEvent(eventLoggerPrefix, "Starting at: " + startTime);
             eventLogger.logEvent(eventLoggerPrefix, "Searching in path \"" + directory + "\"");
+            interrupted = Thread.interrupted();
+            logger.debug("Checking if the Thread is interrupted? "+ interrupted);
             File file = new File(String.valueOf(directory));
             if (file.isDirectory()) {
                 DirectoryStream<Path> direct = Files.newDirectoryStream(directory);
                 for (Path path : direct) {
+                    interrupted = Thread.interrupted();
+
                     if (foundPaths.isFound() && !interrupted) break;
                     SearchA runnable;
                     Thread th;
@@ -108,7 +76,6 @@ public class SearchA implements Runnable {
                     th = new Thread(runnable);
 
                     allChildThreads.add(th);
-                    allChildRunnable.add(runnable);
 
                     th.start();
                     Thread.sleep(delay);
@@ -120,6 +87,7 @@ public class SearchA implements Runnable {
                 boolean found = false;
                 while (scanner.hasNextLine() && !found && !interrupted) {
                     String line = scanner.nextLine();
+                    interrupted = Thread.interrupted();
                     found = (line.contains(word)) && !interrupted;
                 }
                 if (found) {
@@ -138,7 +106,6 @@ public class SearchA implements Runnable {
             }
         }
         catch (InterruptedException e) {
-            new Thread(() -> allChildRunnable.forEach((searchA) -> searchA.setInterrupted(true))).start();
             new Thread(() -> allChildThreads.forEach(Thread::interrupt)).start();
             eventLogger.logEvent(eventLoggerPrefix, "Interrupted thread, word has been found.");
             logger.error(e);

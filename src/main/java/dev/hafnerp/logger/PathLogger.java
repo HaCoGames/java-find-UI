@@ -14,6 +14,10 @@ public class PathLogger {
 
     private final TextArea text_paths;
 
+    private boolean first;
+
+    private int logCounter = 0;
+
     public static PathLogger getInstance(TextArea text_paths) {
         if (pathLogger == null) {
             pathLogger = new PathLogger(text_paths);
@@ -30,11 +34,24 @@ public class PathLogger {
     }
 
     public void logPath(Path path) {
-        text_paths.setText(text_paths.getText() + path + "\n");
+        if (getInstance().isFirst() && (logCounter++ >= 1)) logger.debug("One path had already been found.");
+        else {
+            text_paths.setText(text_paths.getText() + path + "\n");
+            logger.debug("Logging path: " + path);
+        }
+    }
+
+    public boolean isFirst() {
+        return first;
+    }
+
+    public void setFirst(boolean first) {
+        this.first = first;
     }
 
     public synchronized void reset() {
         text_paths.setText("");
-
+        setFirst(false);
+        logCounter = 0;
     }
 }

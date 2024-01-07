@@ -1,11 +1,8 @@
 package dev.hafnerp.javafindvisualization;
 
 import dev.hafnerp.logger.EventLogger;
-import dev.hafnerp.search.SearchA;
 import dev.hafnerp.search.SearchMain;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
@@ -16,7 +13,6 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class HelloController {
 
@@ -32,9 +28,6 @@ public class HelloController {
     private TextArea text_paths;
 
     @FXML
-    private Button button_find;
-
-    @FXML
     private CheckBox checkbox_first;
 
     @FXML
@@ -47,12 +40,8 @@ public class HelloController {
     private TextField text_delaytime;
 
     @FXML
-    private Label welcomeText;
-
-    private String paths = "";
-
-    @FXML
     void onSearchButtonClicked(ActionEvent event) {
+        logger.debug(event.getEventType().getName());
         text_events.setText("");
         text_paths.setText("");
 
@@ -92,7 +81,7 @@ public class HelloController {
     }
 
     private boolean validatePath(String paths) {
-        boolean validPath = true;
+        boolean validPath;
         try {
             Path path = Path.of(paths);
             logger.debug("Checking if the path exists... " + path);

@@ -19,6 +19,7 @@ public class SearchMain {
 
         PathLogger pathLogger = PathLogger.getInstance();
         pathLogger.reset();
+        pathLogger.setFirst(first);
 
         SearchA.setInstanceCounterAll(0);
 
