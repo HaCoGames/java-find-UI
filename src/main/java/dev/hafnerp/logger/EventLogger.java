@@ -27,6 +27,7 @@ public class EventLogger {
     }
 
     private EventLogger(TextArea events) {
+        currentEventLength++;
         this.text_events = events;
     }
 

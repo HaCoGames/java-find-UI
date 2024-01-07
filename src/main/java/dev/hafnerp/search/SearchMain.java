@@ -14,7 +14,7 @@ public class SearchMain {
     private static final Logger logger = LogManager.getLogger(SearchMain.class);
 
     public static void searchFor(boolean first, String word, Path path, int delay) throws InterruptedException, IOException {
-        ListWrapper<Path> listWrapper = ListWrapper.getPathInstance();
+        ListWrapper listWrapper = ListWrapper.getPathInstance();
         listWrapper.reset();
 
         PathLogger pathLogger = PathLogger.getInstance();

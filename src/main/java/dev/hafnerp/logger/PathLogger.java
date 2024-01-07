@@ -1,7 +1,6 @@
 package dev.hafnerp.logger;
 
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

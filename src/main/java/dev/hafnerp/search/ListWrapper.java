@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListWrapper<Type> {
+public class ListWrapper {
     private final List<Path> list;
 
     private static boolean found;
 
-    private static ListWrapper<Path> listWrapper;
+    private static ListWrapper listWrapper;
 
     private final PathLogger pathLogger;
 
@@ -21,8 +21,8 @@ public class ListWrapper<Type> {
         this.list = new LinkedList<>();
     }
 
-    public static synchronized ListWrapper<Path> getPathInstance() {
-        if (listWrapper == null) listWrapper = new ListWrapper<Path>();
+    public static synchronized ListWrapper getPathInstance() {
+        if (listWrapper == null) listWrapper = new ListWrapper();
         return listWrapper;
     }
 

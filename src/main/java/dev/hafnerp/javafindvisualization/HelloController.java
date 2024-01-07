@@ -69,7 +69,7 @@ public class HelloController {
         eventLogger.logEvent("HelloController", "Starting at path: " + searchPath);
         eventLogger.logEvent("HelloController", "Searching for word: \"" + searchString + "\"");
 
-        ListWrapper<Path> pathListWrapper = ListWrapper.getPathInstance();
+        ListWrapper pathListWrapper = ListWrapper.getPathInstance();
 
         logger.debug("Path instance of ListWrapper: "+ pathListWrapper);
 
