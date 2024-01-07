@@ -49,10 +49,12 @@ public class HelloController {
         String searchPathString = text_searchpath.getText();
         searchPathString = searchPathString.isEmpty() ? "." : searchPathString;
 
+        int delayTime = text_delaytime.getText().isEmpty() ? 0:  Integer.parseInt(text_delaytime.getText());
+
         if (!validatePath(searchPathString)) return;
+        if (!validateDelayInput(delayTime)) return;
 
         Path searchPath = Path.of(searchPathString);
-        int delayTime = text_delaytime.getText().isEmpty() ? 0:  Integer.parseInt(text_delaytime.getText());
 
         boolean first = checkbox_first.isSelected();
 
@@ -94,6 +96,15 @@ public class HelloController {
         }
         logger.debug("The path exists? " + validPath);
         return validPath;
+    }
+
+    private boolean validateDelayInput(int delay) {
+        boolean validInput = (delay >= 300 && delay <= 3000) || delay == 0;
+
+        if (validInput) label_ready_to_search.setText("Ready to search!");
+        else label_ready_to_search.setText("The delay must be in Range 500 - 3000 |0!");
+
+        return validInput;
     }
 
     public TextArea getText_events() {
