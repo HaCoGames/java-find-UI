@@ -35,8 +35,8 @@ public class PathLogger {
     public void logPath(Path path) {
         if (getInstance().isFirst() && (logCounter++ >= 1)) logger.debug("One path had already been found.");
         else {
-            text_paths.setText(text_paths.getText() + path + "\n");
-            logger.debug("Logging path: " + path);
+            text_paths.setText(text_paths.getText() + path.toAbsolutePath() + "\n");
+            logger.debug("Logging path: " + path.toAbsolutePath());
         }
     }
 

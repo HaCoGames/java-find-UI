@@ -66,8 +66,6 @@ public class SearchA implements Runnable {
             if (file.isDirectory()) {
                 DirectoryStream<Path> direct = Files.newDirectoryStream(directory);
                 for (Path path : direct) {
-                    interrupted = Thread.interrupted();
-
                     if (foundPaths.isFound() && !interrupted) break;
                     SearchA runnable;
                     Thread th;
@@ -76,8 +74,9 @@ public class SearchA implements Runnable {
                     th = new Thread(runnable);
 
                     allChildThreads.add(th);
+                    interrupted = Thread.interrupted();
 
-                    th.start();
+                    if (!interrupted) th.start();
                     Thread.sleep(delay);
                 }
             }

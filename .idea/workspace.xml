@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Validation for the delay input">
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/javafindvisualization/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/ListWrapper.java" afterDir="false" />
+    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Fixed some warnings">
+      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704637415684</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed some warnings">
+      <created>1704637657359</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1704637657359</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -140,6 +148,7 @@
     <MESSAGE value="Implemented the delay, yet interruption does not work anymore :c" />
     <MESSAGE value="fixed the issue with the Thread interruption :D" />
     <MESSAGE value="Validation for the delay input" />
-    <option name="LAST_COMMIT_MESSAGE" value="Validation for the delay input" />
+    <MESSAGE value="Fixed some warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some warnings" />
   </component>
 </project>
