@@ -2,18 +2,14 @@ package dev.hafnerp.javafindvisualization;
 
 import dev.hafnerp.logger.EventLogger;
 import dev.hafnerp.logger.PathLogger;
-import dev.hafnerp.search.ListWrapper;
-import dev.hafnerp.search.SearchA;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class HelloApplication extends Application {
 

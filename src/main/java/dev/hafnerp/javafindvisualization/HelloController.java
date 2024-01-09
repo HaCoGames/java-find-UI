@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-import dev.hafnerp.search.ListWrapper;
+import dev.hafnerp.search.ListMonitor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -69,9 +69,9 @@ public class HelloController {
         eventLogger.logEvent("HelloController", "Starting at path: " + searchPath);
         eventLogger.logEvent("HelloController", "Searching for word: \"" + searchString + "\"");
 
-        ListWrapper pathListWrapper = ListWrapper.getPathInstance();
+        ListMonitor pathListWrapper = ListMonitor.getPathInstance();
 
-        logger.debug("Path instance of ListWrapper: "+ pathListWrapper);
+        logger.debug("Path instance of ListMonitor: "+ pathListWrapper);
 
         try {
             if (searchString.isEmpty()) searchString = null;

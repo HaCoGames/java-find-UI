@@ -7,22 +7,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListWrapper {
+public class ListMonitor {
     private final List<Path> list;
 
     private static boolean found;
 
-    private static ListWrapper listWrapper;
+    private static ListMonitor listWrapper;
 
     private final PathLogger pathLogger;
 
-    public ListWrapper() {
+    public ListMonitor() {
         pathLogger = PathLogger.getInstance();
         this.list = new LinkedList<>();
     }
 
-    public static synchronized ListWrapper getPathInstance() {
-        if (listWrapper == null) listWrapper = new ListWrapper();
+    public static synchronized ListMonitor getPathInstance() {
+        if (listWrapper == null) listWrapper = new ListMonitor();
         return listWrapper;
     }
 
@@ -32,7 +32,7 @@ public class ListWrapper {
     }
 
     public synchronized void setFound(boolean found) {
-        ListWrapper.found = found;
+        ListMonitor.found = found;
     }
 
     public synchronized boolean isFound() {

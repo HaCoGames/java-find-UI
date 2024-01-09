@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Fixed some warnings">
-      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
+    <list default="true" id="d0777d14-0011-4048-8098-1ed187fe119b" name="Changes" comment="Added the debugging information to the UI">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/logger/PathLogger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/hafnerp/search/SearchA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

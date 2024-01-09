@@ -31,7 +31,7 @@ public class SearchA implements Runnable {
 
     private volatile boolean interrupted;
 
-    private static final ListWrapper foundPaths = ListWrapper.getPathInstance();
+    private static final ListMonitor foundPaths = ListMonitor.getPathInstance();
 
     private static final ArrayList<Thread> allChildThreads = new ArrayList<>();
 
